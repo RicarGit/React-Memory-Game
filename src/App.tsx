@@ -1,18 +1,24 @@
 import * as C from './App.styles'
+import logoImage from './assets/devmemory_logo.png'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <C.Container>
-        <C.Info>
+    <C.Container>
+      <C.Info>
+        <C.LogoLink href="">
+          <img src={logoImage} width="200" alt="" />
+        </C.LogoLink>
 
-        </C.Info>
-        <C.GridArea>
+        <C.InfoArea>
+          ...
+        </C.InfoArea>
 
-        </C.GridArea>
-      </C.Container>
-
-    </div>
+        <button>Reiniciar</button>
+      </C.Info>
+      <C.GridArea>
+        ...
+      </C.GridArea>
+    </C.Container >
   )
 }
 
