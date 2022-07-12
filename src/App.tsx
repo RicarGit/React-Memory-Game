@@ -1,13 +1,19 @@
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
+import restartIcon from './svgs/restart.svg'
 import { GameInfoItem } from './components/GameInfoItem'
+import { Button } from './components/Button'
 
 const App = () => {
+  const resetAndCreateGameGrid = () => {
+
+  }
+
   return (
     <C.Container>
       <C.Info>
         <C.LogoLink href="">
-          <img src={logoImage} width="200" alt="" />
+          <C.Logo src={logoImage} alt="logo devMemory" />
         </C.LogoLink>
 
         <C.InfoArea>
@@ -15,7 +21,7 @@ const App = () => {
           <GameInfoItem label='Movimentos' value='0' />
         </C.InfoArea>
 
-        <button>Reiniciar</button>
+        <Button label='Reiniciar' icon={restartIcon} onClick={resetAndCreateGameGrid} />
       </C.Info>
       <C.GridArea>
         ...
