@@ -5,7 +5,12 @@ import { GameInfoItem } from './components/GameInfoItem'
 import { Button } from './components/Button'
 
 const App = () => {
-  const resetAndCreateGameGrid = () => {
+
+  const [playing, setPlaying] = useState(false)
+  const [timeElapsed, setTimeElapsed] = useState(0)
+  const [moveCount, setMoveCount] = useState(0)
+  const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
+  const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
 
   }
 
