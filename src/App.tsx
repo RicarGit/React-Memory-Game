@@ -22,12 +22,13 @@ const App = () => {
         </C.LogoLink>
 
         <C.InfoArea>
-          <GameInfoItem label='Tempo' value='00:00' />
-          <GameInfoItem label='Movimentos' value='0' />
+          <GameInfoItem label='Tempo' value={timeElapsed.toString()} />
+          <GameInfoItem label='Movimentos' value={moveCount.toString()} />
         </C.InfoArea>
 
-        <Button label='Reiniciar' icon={restartIcon} onClick={resetAndCreateGameGrid} />
+        <Button label='Reiniciar' icon={restartIcon} onClick={resetGameGrid} />
       </C.Info>
+
       <C.GridArea>
         <C.Grid>
 
