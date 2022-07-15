@@ -12,8 +12,19 @@ const App = () => {
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
 
+  const clearCardStatus = () => {
+    const newCardStatus: CardStatus[] = []
+
+    for (let i = 0; i < cards.length * 2; i++) {
+      newCardStatus.push({
+        cardIndex: null,
+        upturnedCard: false,
+        fixedUpturnedCard: false
+      })
   }
 
+    return newCardStatus
+  }
   return (
     <C.Container>
       <C.Info>
