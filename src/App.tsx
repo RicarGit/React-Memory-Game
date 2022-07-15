@@ -1,8 +1,15 @@
+import { useEffect, useState } from 'react'
+
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
 import restartIcon from './svgs/restart.svg'
+
 import { GameInfoItem } from './components/GameInfoItem'
 import { Button } from './components/Button'
+import { CardStatus } from './types/CardStatus'
+import { CardItem } from './components/CardItem'
+
+import { cards } from './utils/cards'
 
 const App = () => {
 
@@ -11,6 +18,8 @@ const App = () => {
   const [moveCount, setMoveCount] = useState(0)
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
+
+  useEffect(() => resetGameGrid(), [])
 
   const clearCardStatus = () => {
     const newCardStatus: CardStatus[] = []
@@ -25,6 +34,7 @@ const App = () => {
 
     return newCardStatus
   }
+
   type ShuffleCard = () => CardStatus[]
 
   const shuffleCards = (cardStatusClear: ShuffleCard) => {
@@ -44,6 +54,17 @@ const App = () => {
 
     setCardStatus(newCardStatus)
   }
+
+  const resetGameGrid = () => {
+    setTimeElapsed(0)
+    setMoveCount(0)
+    setUpturnedCardsCount(0)
+
+    shuffleCards(clearCardStatus)
+
+    setPlaying(true)
+  }
+
   return (
     <C.Container>
       <C.Info>
