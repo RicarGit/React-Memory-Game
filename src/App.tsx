@@ -25,6 +25,25 @@ const App = () => {
 
     return newCardStatus
   }
+  type ShuffleCard = () => CardStatus[]
+
+  const shuffleCards = (cardStatusClear: ShuffleCard) => {
+    const newCardStatus = cardStatusClear()
+
+    for (let i = 0; i < 2; i++) {
+      for (let j = 0; j < cards.length; j++) {
+        let position = -1
+
+        while (position < 0 || newCardStatus[position].cardIndex !== null) {
+          position = Math.floor(Math.random() * (cards.length * 2))
+        }
+
+        newCardStatus[position].cardIndex = j
+      }
+    }
+
+    setCardStatus(newCardStatus)
+  }
   return (
     <C.Container>
       <C.Info>
