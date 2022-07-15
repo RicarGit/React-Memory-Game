@@ -31,7 +31,12 @@ const App = () => {
 
       <C.GridArea>
         <C.Grid>
-
+          {cardStatus.map((card, index) => (
+            <CardItem
+              key={index}
+              card={card}
+              onClick={() => handleItemClick(index)} />
+          ))}
         </C.Grid>
       </C.GridArea>
     </C.Container >
