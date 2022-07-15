@@ -13,9 +13,10 @@ export const Container = styled.div`
 `
 
 export const Info = styled.div`
+  width: auto;
   display: flex;
   flex-direction: column;
-  width: auto;
+  justify-content: space-between;
 
   @media (max-width: 750px) {
     margin-bottom: 50px;
@@ -54,7 +55,7 @@ export const GridArea = styled.div`
 `
 
 export const Grid = styled.div`
-  width: 430px;
+  width: inherit;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
