@@ -1,9 +1,9 @@
-export const formatTimeElapsed = (time: number) => {
-  let minutes = Math.floor(time / 60)
-  time -= (minutes * 60)
+export const formatTimeElapsed = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60)
+  seconds -= (minutes * 60)
 
-  let formatedSeconds = `${time < 10 ? '0' + time : time}`
-  let formatedMinutes = `${minutes < 10 ? '0' + minutes : minutes} `
+  const formatedSeconds = seconds < 10 ? `0${seconds}` : seconds
+  const formatedMinutes = minutes < 10 ? `0${minutes}` : minutes
 
-  return `${formatedMinutes}:${formatedSeconds} `
+  return `${formatedMinutes}:${formatedSeconds}`
 }
