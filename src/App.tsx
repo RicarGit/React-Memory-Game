@@ -10,6 +10,7 @@ import { CardStatus } from './types/CardStatus'
 import { CardItem } from './components/CardItem'
 
 import { cards } from './utils/cards'
+import { formatTimeElapsed } from './utils/formatTimeElapsed'
 
 const App = () => {
 
@@ -86,7 +87,7 @@ const App = () => {
         </C.LogoLink>
 
         <C.InfoArea>
-          <GameInfoItem label='Tempo' value={timeElapsed.toString()} />
+          <GameInfoItem label='Tempo' value={formatTimeElapsed(timeElapsed)} />
           <GameInfoItem label='Movimentos' value={moveCount.toString()} />
         </C.InfoArea>
 
