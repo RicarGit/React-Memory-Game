@@ -65,6 +65,19 @@ const App = () => {
     setPlaying(true)
   }
 
+  const handleItemClick = (index: number) => {
+    if (playing && index !== null && upturnedCardsCount < 2) {
+      const newCardStatus = [...cardStatus]
+
+      if (newCardStatus[index].upturnedCard === false && newCardStatus[index].fixedUpturnedCard === false) {
+        newCardStatus[index].upturnedCard = true
+        setUpturnedCardsCount(upturnedCardsCount + 1)
+      }
+
+      setCardStatus(newCardStatus)
+    }
+  }
+
   return (
     <C.Container>
       <C.Info>
