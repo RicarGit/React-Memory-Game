@@ -13,14 +13,58 @@ import { cards } from './utils/cards'
 import { formatTimeElapsed } from './utils/formatTimeElapsed'
 
 const App = () => {
-
   const [playing, setPlaying] = useState(false)
   const [timeElapsed, setTimeElapsed] = useState(0)
   const [moveCount, setMoveCount] = useState(0)
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
 
-  useEffect(() => resetGameGrid(), [])
+  useEffect(() => resetGameGrid, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (playing) {
+        setTimeElapsed(timeElapsed + 1)
+      }
+    }, 2000)
+
+    return () => clearInterval(timer)
+  }, [playing, timeElapsed])
+
+  useEffect(() => {
+    if (upturnedCardsCount === 2) {
+      const upturnedCards = cardStatus.filter(card => card.upturnedCard)
+
+      if (upturnedCards.length === 2) {
+        const newCardStatus = [...cardStatus]
+        const [firstUpturnedCard, secondUpturnedCard] = upturnedCards
+
+        if (firstUpturnedCard.cardIndex === secondUpturnedCard.cardIndex) {
+          newCardStatus.forEach(card => {
+            if (card.upturnedCard) {
+              card.upturnedCard = false
+              card.fixedUpturnedCard = true
+            }
+          })
+
+          setUpturnedCardsCount(0)
+        }
+
+        if (firstUpturnedCard.cardIndex !== secondUpturnedCard.cardIndex) {
+          setTimeout(() => {
+            newCardStatus.forEach(card => {
+              card.upturnedCard = false
+            })
+
+            setUpturnedCardsCount(0)
+          }, 1000)
+        }
+
+        setMoveCount(moveCount => moveCount + 1)
+        setCardStatus(newCardStatus)
+      }
+    }
+  }, [upturnedCardsCount])
 
   const clearCardStatus = () => {
     const newCardStatus: CardStatus[] = []
@@ -31,15 +75,13 @@ const App = () => {
         upturnedCard: false,
         fixedUpturnedCard: false
       })
-  }
+    }
 
     return newCardStatus
   }
 
-  type ShuffleCard = () => CardStatus[]
-
-  const shuffleCards = (cardStatusClear: ShuffleCard) => {
-    const newCardStatus = cardStatusClear()
+  const shuffleCards = () => {
+    const newCardStatus = clearCardStatus()
 
     for (let i = 0; i < 2; i++) {
       for (let j = 0; j < cards.length; j++) {
@@ -61,8 +103,7 @@ const App = () => {
     setMoveCount(0)
     setUpturnedCardsCount(0)
 
-    shuffleCards(clearCardStatus)
-
+    shuffleCards()
     setPlaying(true)
   }
 
