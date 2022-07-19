@@ -9,12 +9,19 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media (max-width: 550px) {
+    height: 100px;
+    width: 100px;
+  }
 `
 
 export const Icon = styled.img`
   height: 50px;
   width: 50px;
-  padding: 25px;
-  border: 2px solid black;
-  border-radius: 20px;
+
+  @media (max-width: 550px) {
+    height: 40px;
+    width: 40px;
+  }
 `

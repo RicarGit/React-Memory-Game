@@ -3,12 +3,15 @@ import styled from "styled-components"
 export const Container = styled.div`
   width: 100%;
   max-width: 750px;
-  margin: auto;
   display: flex;
-  padding: 50px 0;
+  margin: 50px auto;
 
   @media (max-width: 750px) {
     flex-direction: column;
+  }
+
+  @media (max-width: 550px) {
+    margin: 10px auto;
   }
 `
 
@@ -21,6 +24,10 @@ export const Info = styled.div`
   @media (max-width: 750px) {
     margin-bottom: 50px;
     align-items: center;
+  }
+
+  @media (max-width: 550px) {
+    margin-bottom: 20px;
   }
 `
 
@@ -41,6 +48,11 @@ export const InfoArea = styled.div`
     justify-content: space-around;
     text-align: center;
   }
+
+  @media (max-width: 550px) {
+    justify-content: space-evenly;
+    margin: 0;
+  }
 `
 
 export const GridArea = styled.div`
@@ -59,4 +71,8 @@ export const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+
+  @media (max-width: 550px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `

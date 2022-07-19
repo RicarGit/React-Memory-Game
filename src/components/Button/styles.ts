@@ -13,6 +13,11 @@ export const Container = styled.button`
   &:hover {
     opacity: .8;
   }
+
+  @media (max-width: 550px) {
+    width: 150px;
+    height: 35px;
+  }
 `
 
 export const IconArea = styled.div`
@@ -22,10 +27,18 @@ export const IconArea = styled.div`
   align-items: center;
   border-right: 1px solid rgba(255, 255, 255, .2);
   padding: 0 15px;
+
+  @media (max-width: 550px) {
+    padding: 0 10px;
+  }
 `
 
 export const Icon = styled.img`
   height: 20px;
+
+  @media (max-width: 550px) {
+    height: 15px;
+  }
 `
 
 export const Label = styled.span`
