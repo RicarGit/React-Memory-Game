@@ -66,6 +66,12 @@ const App = () => {
     }
   }, [upturnedCardsCount])
 
+  useEffect(() => {
+    if (moveCount > 0 && cardStatus.every(card => card.fixedUpturnedCard === true)) {
+      setPlaying(false)
+    }
+  }, [moveCount, cardStatus])
+
   const clearCardStatus = () => {
     const newCardStatus: CardStatus[] = []
 
