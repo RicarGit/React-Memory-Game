@@ -12,7 +12,10 @@ export const CardItem = ({ card, onClick }: Props) => {
   const { cardIndex, upturnedCard, fixedUpturnedCard } = card
 
   return (
-    <C.Container onClick={onClick}>
+    <C.Container
+      showBackground={card.fixedUpturnedCard || card.upturnedCard}
+      showBorder={card.fixedUpturnedCard || card.upturnedCard}
+      onClick={onClick}>
       {fixedUpturnedCard || upturnedCard ||
         <C.Icon src={b7Svg} alt="card's back" />
       }

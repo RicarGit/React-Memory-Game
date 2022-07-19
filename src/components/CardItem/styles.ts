@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+type ContainerProps = {
+  showBackground: boolean
+  showBorder: boolean
+}
+
+export const Container = styled.div<ContainerProps>`
   height: 120px;
   width: 120px;
+  box-sizing: border-box;
+  border: ${props => props.showBorder ? 'none' : '2px solid #000'};
   border-radius: 20px;
-  background-color: #1550FF;
+  background-color: ${props => props.showBackground ? '#1550FF' : '$f00'};
   display: flex;
   justify-content: center;
   align-items: center;
