@@ -26,7 +26,7 @@ const App = () => {
       if (playing) {
         setTimeElapsed(timeElapsed + 1)
       }
-    }, 2000)
+    }, 1000)
 
     return () => clearInterval(timer)
   }, [playing, timeElapsed])
