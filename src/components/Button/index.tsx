@@ -3,7 +3,7 @@ import * as C from './styles'
 
 type Props = {
   label: string
-  icon?: string
+  icon: string
   onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 

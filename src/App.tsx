@@ -20,9 +20,6 @@ const App = () => {
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => resetGameGrid, [])
-
   useEffect(() => {
     const timer = setInterval(() => {
       if (playing) {
@@ -141,7 +138,7 @@ const App = () => {
           <GameInfoItem label='Movimentos' value={moveCount.toString()} />
         </C.InfoArea>
 
-        <Button label='Reiniciar' icon={restartIcon} onClick={resetGameGrid} />
+        <Button label={playing ? 'Reiniciar' : 'Iniciar Jogo'} icon={playing ? restartIcon : ''} onClick={resetGameGrid} />
       </C.Info>
 
       <C.GridArea>
