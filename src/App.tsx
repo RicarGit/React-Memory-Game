@@ -19,6 +19,7 @@ const App = () => {
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => resetGameGrid, [])
 
   useEffect(() => {
