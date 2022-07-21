@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
 import restartIcon from './svgs/restart.svg'
 
 import { GameInfoItem } from './components/GameInfoItem'
-import { Button } from './components/Button'
-import { CardStatus } from './types/CardStatus'
 import { CardItem } from './components/CardItem'
+import { Button } from './components/Button'
+
+import { CardStatus } from './types/CardStatus'
 
 import { cards } from './utils/cards'
 import { formatTimeElapsed } from './utils/formatTimeElapsed'
@@ -74,7 +75,7 @@ const App = () => {
     }
   }, [moveCount, cardStatus])
 
-  const clearCardStatus = () => {
+  const clearCardStatus = useCallback(() => {
     const newCardStatus: CardStatus[] = []
 
     for (let i = 0; i < cards.length * 2; i++) {
@@ -86,9 +87,9 @@ const App = () => {
     }
 
     return newCardStatus
-  }
+  }, [])
 
-  const shuffleCards = () => {
+  const shuffleCards = useCallback(() => {
     const newCardStatus = clearCardStatus()
 
     for (let i = 0; i < 2; i++) {
@@ -104,18 +105,18 @@ const App = () => {
     }
 
     setCardStatus(newCardStatus)
-  }
+  }, [])
 
-  const resetGameGrid = () => {
+  const resetGameGrid = useCallback(() => {
     setTimeElapsed(0)
     setMoveCount(0)
     setUpturnedCardsCount(0)
 
     shuffleCards()
     setPlaying(true)
-  }
+  }, [shuffleCards])
 
-  const handleItemClick = (index: number) => {
+  const handleItemClick = useCallback((index: number) => {
     if (playing && index !== null && upturnedCardsCount < 2) {
       const newCardStatus = [...cardStatus]
 
@@ -126,7 +127,7 @@ const App = () => {
 
       setCardStatus(newCardStatus)
     }
-  }
+  }, [cardStatus, playing, upturnedCardsCount])
 
   return (
     <C.Container>
