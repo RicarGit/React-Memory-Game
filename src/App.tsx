@@ -48,6 +48,7 @@ const App = () => {
           })
 
           setUpturnedCardsCount(0)
+          setCardStatus(newCardStatus)
         }
 
         if (firstUpturnedCard.cardIndex !== secondUpturnedCard.cardIndex) {
@@ -57,14 +58,14 @@ const App = () => {
             })
 
             setUpturnedCardsCount(0)
+            setCardStatus(newCardStatus)
           }, 1000)
         }
 
         setMoveCount(moveCount => moveCount + 1)
-        setCardStatus(newCardStatus)
       }
     }
-  }, [upturnedCardsCount])
+  }, [upturnedCardsCount, cardStatus])
 
   useEffect(() => {
     if (moveCount > 0 && cardStatus.every(card => card.fixedUpturnedCard === true)) {
