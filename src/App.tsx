@@ -105,7 +105,7 @@ const App = () => {
     }
 
     setCardStatus(newCardStatus)
-  }, [])
+  }, [clearCardStatus])
 
   const resetGameGrid = useCallback(() => {
     setTimeElapsed(0)
