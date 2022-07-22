@@ -28,7 +28,7 @@ const App = () => {
       const currentRecord = JSON.parse(recordJson)
       setRecord(currentRecord)
     }
-  }, [])
+  }, [playing])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -160,7 +160,7 @@ const App = () => {
           <GameInfoItem label='Movimentos' record={false} value={moveCount.toString()} />
           <GameInfoItem label='Recorde' record={true} value={''}>
             <>
-              {`Tempo: ${formatTimeElapsed(record[0])}`}
+              {`Tempo: ${formatTimeElapsed(record[0]) || '00:00'}`}
               <br />
               {`Movimentos: ${record[1] || 0}`}
             </>
