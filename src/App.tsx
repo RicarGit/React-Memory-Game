@@ -18,7 +18,17 @@ const App = () => {
   const [timeElapsed, setTimeElapsed] = useState(0)
   const [moveCount, setMoveCount] = useState(0)
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
+  const [record, setRecord] = useState<number[]>([])
   const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
+
+  useEffect(() => {
+    const recordJson = localStorage.getItem('record')
+
+    if (recordJson) {
+      const currentRecord = JSON.parse(recordJson)
+      setRecord(currentRecord)
+    }
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -68,9 +78,21 @@ const App = () => {
 
   useEffect(() => {
     if (moveCount > 0 && cardStatus.every(card => card.fixedUpturnedCard === true)) {
+      const recordJson = localStorage.getItem('record')
+
+      if (recordJson) {
+        const record = JSON.parse(recordJson)
+        const [timeElapsedRecord, moveCountRecord] = record
+
+        if (moveCount <= moveCountRecord && timeElapsed <= timeElapsedRecord) {
+          setRecord([timeElapsed, moveCount])
+        }
+      }
+
+      localStorage.setItem("record", JSON.stringify([timeElapsed, moveCount]))
       setPlaying(false)
     }
-  }, [moveCount, cardStatus])
+  }, [moveCount, timeElapsed, cardStatus])
 
   const clearCardStatus = useCallback(() => {
     const newCardStatus: CardStatus[] = []
@@ -134,8 +156,15 @@ const App = () => {
         </C.LogoLink>
 
         <C.InfoArea>
-          <GameInfoItem label='Tempo' value={formatTimeElapsed(timeElapsed)} />
-          <GameInfoItem label='Movimentos' value={moveCount.toString()} />
+          <GameInfoItem label='Tempo' record={false} value={formatTimeElapsed(timeElapsed) || '00:00'} />
+          <GameInfoItem label='Movimentos' record={false} value={moveCount.toString()} />
+          <GameInfoItem label='Recorde' record={true} value={''}>
+            <>
+              {`Tempo: ${formatTimeElapsed(record[0])}`}
+              <br />
+              {`Movimentos: ${record[1] || 0}`}
+            </>
+          </GameInfoItem>
         </C.InfoArea>
 
         <Button label={playing ? 'Reiniciar' : 'Iniciar Jogo'} icon={playing ? restartIcon : ''} onClick={resetGameGrid} />

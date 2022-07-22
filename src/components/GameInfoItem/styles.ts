@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type Record = {
+  record: boolean
+}
+
 export const Container = styled.div`
   margin: 20px 0;
 
@@ -17,13 +21,13 @@ export const Label = styled.div`
   }
 `
 
-export const Value = styled.div`
-  font-size: 37px;
+export const Value = styled.div<Record>`
+  font-size: ${({ record }) => record ? '18px' : '37px'};
   font-weight: bold;
   color: #101C40;
 
   @media (max-width: 550px) {
-    font-size: 30px;
+    font-size: ${({ record }) => record ? '12px' : '30px'}
   }
 
 `
