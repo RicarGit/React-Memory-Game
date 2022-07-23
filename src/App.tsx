@@ -85,11 +85,14 @@ const App = () => {
         const [timeElapsedRecord, moveCountRecord] = record
 
         if (moveCount <= moveCountRecord && timeElapsed <= timeElapsedRecord) {
+          localStorage.setItem("record", JSON.stringify([timeElapsed, moveCount]))
           setRecord([timeElapsed, moveCount])
         }
+
+      } else {
+        localStorage.setItem("record", JSON.stringify([timeElapsed, moveCount]))
       }
 
-      localStorage.setItem("record", JSON.stringify([timeElapsed, moveCount]))
       setPlaying(false)
     }
   }, [moveCount, timeElapsed, cardStatus])
@@ -141,7 +144,7 @@ const App = () => {
 
       if (newCardStatus[index].upturnedCard === false && newCardStatus[index].fixedUpturnedCard === false) {
         newCardStatus[index].upturnedCard = true
-        setUpturnedCardsCount(upturnedCardsCount + 1)
+        setUpturnedCardsCount(upturnedCardsCount => upturnedCardsCount + 1)
       }
 
       setCardStatus(newCardStatus)
@@ -157,12 +160,12 @@ const App = () => {
 
         <C.InfoArea>
           <GameInfoItem label='Tempo' record={false} value={formatTimeElapsed(timeElapsed) || '00:00'} />
-          <GameInfoItem label='Movimentos' record={false} value={moveCount.toString()} />
+          <GameInfoItem label='Movimentos' record={false} value={`${moveCount}`} />
           <GameInfoItem label='Recorde' record={true} value={''}>
             <>
               {`Tempo: ${formatTimeElapsed(record[0]) || '00:00'}`}
               <br />
-              {`Movimentos: ${record[1] || 0}`}
+              {`Movimentos: ${record[1] + 1 || 0}`}
             </>
           </GameInfoItem>
         </C.InfoArea>
