@@ -15,6 +15,7 @@ export const CardItem = ({ card, onClick }: Props) => {
     <C.Container
       showBackground={card.fixedUpturnedCard || card.upturnedCard}
       showBorder={card.fixedUpturnedCard || card.upturnedCard}
+      flip={card.upturnedCard || card.fixedUpturnedCard}
       onClick={onClick}>
       {fixedUpturnedCard || upturnedCard ||
         <C.Icon src={b7Svg} alt="card's back" />

@@ -3,6 +3,7 @@ import styled from "styled-components";
 type ContainerProps = {
   showBackground: boolean
   showBorder: boolean
+  flip: boolean
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -15,8 +16,10 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: ${props => props.flip ? 'rotateY(-180deg)' : 'rotateY(0deg)'};
+  transition: .1s linear;
   cursor: pointer;
-
+  
   @media (max-width: 550px) {
     height: 75px;
     width: 75px;
