@@ -9,17 +9,17 @@ export const Container = styled.div<ContainerProps>`
   height: 120px;
   width: 120px;
   box-sizing: border-box;
-  border: ${props => props.showBorder ? 'none' : '2px solid #000'};
+  border: ${props => props.showBorder ? '4px solid #1550FF' : '3px solid #000'};
   border-radius: 20px;
-  background-color: ${props => props.showBackground ? '#1550FF' : '$f00'};
+  background-color: ${props => props.showBackground && '#fff'};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 
   @media (max-width: 550px) {
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
   }
 `
 

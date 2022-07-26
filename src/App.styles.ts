@@ -2,10 +2,15 @@ import styled from "styled-components"
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 750px;
+  max-width: 1000px;
   display: flex;
   margin: 50px auto;
 
+  @media (max-width: 1030px) {
+    width: auto;
+    margin: 40px 20px;
+  }
+ 
   @media (max-width: 750px) {
     flex-direction: column;
   }
@@ -69,10 +74,27 @@ export const GridArea = styled.div`
 export const Grid = styled.div`
   width: inherit;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  position: relative;
+  grid-template-columns: repeat(5, 1fr);
   gap: 10px;
+  animation: opacity 1.5s ease-in-out;
 
-  @media (max-width: 550px) {
-    grid-template-columns: repeat(3, 1fr);
+  @keyframes opacity {
+    0% {
+      left: 150px;
+      opacity: 0;
+    }
+    100% {
+      left: 0;
+      opacity: 1;
+    }
+  }
+
+    @media (max-width: 900px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+    @media (max-width: 550px) {
+    gap: 5px;
   }
 `

@@ -13,7 +13,7 @@ export const Container = styled.div`
 `
 
 export const Label = styled.div`
-  font-size: 15px;
+  font-size: 20px;
   color: #6A7D8B;
 
   @media (max-width: 550px) {
@@ -22,7 +22,7 @@ export const Label = styled.div`
 `
 
 export const Value = styled.div<Record>`
-  font-size: ${({ record }) => record ? '18px' : '37px'};
+  font-size: ${({ record }) => record ? '20px' : '43px'};
   font-weight: bold;
   color: #101C40;
 
