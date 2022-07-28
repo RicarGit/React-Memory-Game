@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from 'react'
 
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
-import restartIcon from './svgs/restart.svg'
+import restartIcon from './assets/svgs/restart.svg'
 
-import { GameInfoItem } from './components/GameInfoItem'
-import { CardItem } from './components/CardItem'
-import { Button } from './components/Button'
+import { GameInfoItem } from './shared/components/GameInfoItem'
+import { CardItem } from './shared/components/CardItem'
+import { Button } from './shared/components/Button'
 
 import { CardStatus } from './types/CardStatus'
 

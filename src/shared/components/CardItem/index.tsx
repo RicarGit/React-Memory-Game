@@ -1,6 +1,6 @@
 import { CardStatus } from 'types/CardStatus'
 import { cards } from 'utils/cards'
-import b7Svg from 'svgs/b7.svg'
+import b7Svg from 'assets/svgs/b7.svg'
 import * as C from './styles'
 
 type Props = {

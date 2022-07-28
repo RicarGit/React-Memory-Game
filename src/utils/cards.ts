@@ -1,13 +1,13 @@
-import chocolate from 'svgs/chocolate.svg'
-import cocktail from 'svgs/cocktail.svg'
-import coffee from 'svgs/coffee.svg'
-import cookie from 'svgs/cookie.svg'
-import donut from 'svgs/donut.svg'
-import forkAndKnife from 'svgs/fork-and-knife.svg'
-import frenchFries from 'svgs/french-fries.svg'
-import hamburger from 'svgs/hamburger.svg'
-import iceCream from 'svgs/ice-cream.svg'
-import pudding from 'svgs/pudding.svg'
+import chocolate from 'assets/svgs/chocolate.svg'
+import cocktail from 'assets/svgs/cocktail.svg'
+import coffee from 'assets/svgs/coffee.svg'
+import cookie from 'assets/svgs/cookie.svg'
+import donut from 'assets/svgs/donut.svg'
+import forkAndKnife from 'assets/svgs/fork-and-knife.svg'
+import frenchFries from 'assets/svgs/french-fries.svg'
+import hamburger from 'assets/svgs/hamburger.svg'
+import iceCream from 'assets/svgs/ice-cream.svg'
+import pudding from 'assets/svgs/pudding.svg'
 
 export const cards = [
   { name: 'chocolate', icon: chocolate },
