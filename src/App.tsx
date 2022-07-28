@@ -10,8 +10,8 @@ import { Button } from './shared/components/Button'
 
 import { CardStatus } from './types/CardStatus'
 
-import { cards } from './utils/cards'
-import { formatTimeElapsed } from './utils/formatTimeElapsed'
+import { cards } from './shared/cards'
+import { formatTimeElapsed } from './helpers/formatTimeElapsed'
 
 const App = () => {
   const [playing, setPlaying] = useState(false)

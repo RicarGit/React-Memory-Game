@@ -1,5 +1,5 @@
 import { CardStatus } from 'types/CardStatus'
-import { cards } from 'utils/cards'
+import { cards } from 'shared/cards'
 import b7Svg from 'assets/svgs/b7.svg'
 import * as C from './styles'
 
