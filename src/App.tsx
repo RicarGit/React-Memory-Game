@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
@@ -19,7 +19,7 @@ const App = () => {
   const [moveCount, setMoveCount] = useState(0)
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [record, setRecord] = useState<number[]>([])
-  const [cardStatus, setCardStatus] = useState<CardStatus[]>([])
+  const cardStatus = useRef<CardStatus[]>([])
 
   useEffect(() => {
     const recordJson = localStorage.getItem('record')
@@ -42,14 +42,13 @@ const App = () => {
 
   useEffect(() => {
     if (upturnedCardsCount === 2) {
-      const upturnedCards = cardStatus.filter(card => card.upturnedCard)
+      const upturnedCards = cardStatus.current.filter(card => card.upturnedCard)
 
       if (upturnedCards.length === 2) {
-        const newCardStatus = [...cardStatus]
         const [firstUpturnedCard, secondUpturnedCard] = upturnedCards
 
         if (firstUpturnedCard.cardIndex === secondUpturnedCard.cardIndex) {
-          newCardStatus.forEach(card => {
+          cardStatus.current.forEach(card => {
             if (card.upturnedCard) {
               card.upturnedCard = false
               card.fixedUpturnedCard = true
@@ -57,27 +56,25 @@ const App = () => {
           })
 
           setUpturnedCardsCount(0)
-          setCardStatus(newCardStatus)
         }
 
         if (firstUpturnedCard.cardIndex !== secondUpturnedCard.cardIndex) {
           setTimeout(() => {
-            newCardStatus.forEach(card => {
+            cardStatus.current.forEach(card => {
               card.upturnedCard = false
             })
 
             setUpturnedCardsCount(0)
-            setCardStatus(newCardStatus)
           }, 1000)
         }
 
         setMoveCount(moveCount => moveCount + 1)
       }
     }
-  }, [upturnedCardsCount, cardStatus])
+  }, [upturnedCardsCount])
 
   useEffect(() => {
-    if (moveCount > 0 && cardStatus.every(card => card.fixedUpturnedCard === true)) {
+    if (moveCount > 0 && cardStatus.current.every(card => card.fixedUpturnedCard === true)) {
       const recordJson = localStorage.getItem('record')
 
       if (recordJson) {
@@ -95,7 +92,7 @@ const App = () => {
 
       setPlaying(false)
     }
-  }, [moveCount, timeElapsed, cardStatus])
+  }, [moveCount, timeElapsed])
 
   const clearCardStatus = useCallback(() => {
     const newCardStatus: CardStatus[] = []
@@ -126,7 +123,7 @@ const App = () => {
       }
     }
 
-    setCardStatus(newCardStatus)
+    cardStatus.current = newCardStatus
   }, [clearCardStatus])
 
   const resetGameGrid = useCallback(() => {
@@ -140,16 +137,13 @@ const App = () => {
 
   const handleItemClick = useCallback((index: number) => {
     if (playing && index !== null && upturnedCardsCount < 2) {
-      const newCardStatus = [...cardStatus]
 
-      if (newCardStatus[index].upturnedCard === false && newCardStatus[index].fixedUpturnedCard === false) {
-        newCardStatus[index].upturnedCard = true
+      if (cardStatus.current[index].upturnedCard === false && cardStatus.current[index].fixedUpturnedCard === false) {
+        cardStatus.current[index].upturnedCard = true
         setUpturnedCardsCount(upturnedCardsCount => upturnedCardsCount + 1)
       }
-
-      setCardStatus(newCardStatus)
     }
-  }, [cardStatus, playing, upturnedCardsCount])
+  }, [playing, upturnedCardsCount])
 
   return (
     <C.Container>
@@ -165,7 +159,7 @@ const App = () => {
             <>
               {`Tempo: ${formatTimeElapsed(record[0]) || '00:00'}`}
               <br />
-              {`Movimentos: ${record[1] + 1 || 0}`}
+              {`Movimentos: ${record[1] || 0}`}
             </>
           </GameInfoItem>
         </C.InfoArea>
@@ -175,7 +169,7 @@ const App = () => {
 
       <C.GridArea>
         <C.Grid>
-          {cardStatus.map((card, index) => (
+          {cardStatus.current.map((card, index) => (
             <CardItem
               key={index}
               card={card}
