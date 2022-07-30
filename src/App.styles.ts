@@ -14,11 +14,13 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1000px;
   display: flex;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding-top: 50px;
 
   @media (max-width: 1030px) {
     width: auto;
-    margin: 40px 20px;
+    margin: 0 20px;
+    padding-top: 40px;
   }
  
   @media (max-width: 750px) {
@@ -26,15 +28,21 @@ export const Container = styled.div`
   }
 
   @media (max-width: 550px) {
-    margin: 10px auto;
+    margin: 0 auto;
+    padding-top: 15px;
   }
 `
 
-export const Info = styled.div`
+type InfoTheme = {
+  currentTheme: ThemeProps
+}
+
+export const Info = styled.div<InfoTheme>`
   width: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: ${({ theme, currentTheme }) => currentTheme === 'dark' && theme[currentTheme].alignCenter};
 
   @media (max-width: 750px) {
     margin-bottom: 50px;
@@ -52,6 +60,11 @@ export const LogoLink = styled.a`
 
 export const Logo = styled.img`
   width: 200px;
+`
+
+export const ThemeIcon = styled.img`
+  width: 37px;
+  padding: 0 12px;
 `
 
 export const InfoArea = styled.div`

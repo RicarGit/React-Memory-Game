@@ -1,14 +1,20 @@
 import styled from "styled-components/macro";
+import { ThemeProps } from "types/ThemeProps";
 
-export const Container = styled.button`
+type buttonTheme = {
+  currentTheme: ThemeProps
+}
+
+export const Container = styled.button<buttonTheme>`
   width: 200px;
   height: 50px;
   display: flex;
-  background-color: #1550FF;
+  background-color: ${({ theme, currentTheme }) => theme[currentTheme].buttonBg};
   border: none;
   border-radius: 10px;
   opacity: 1;
-  transition: all ease .3s;
+  transition: all ease .8s;
+  box-shadow: ${({ theme, currentTheme }) => theme[currentTheme].boxShadow};
 
   &:hover {
     opacity: .8;
@@ -41,9 +47,9 @@ export const Icon = styled.img`
   }
 `
 
-export const Label = styled.span`
+export const Label = styled.span<buttonTheme>`
   height: inherit;
-  color: #fff;
+  color: ${({ theme, currentTheme }) => theme[currentTheme].buttonLabel};
   display: flex;
   justify-content: center;
   align-items: center;

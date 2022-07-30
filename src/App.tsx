@@ -1,14 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
+import darkLogoImage from './assets/devmemory_logo_dark_mode.png'
+import themeIconBright from './assets/brightness.png'
+import themeIconBlack from './assets/blackness.png'
 import restartIcon from './assets/svgs/restart.svg'
+import darkRestartIcon from './assets/svgs/restartDark.svg'
 
 import { GameInfoItem } from './shared/components/GameInfoItem'
 import { CardItem } from './shared/components/CardItem'
 import { Button } from './shared/components/Button'
 
 import { CardStatus } from './types/CardStatus'
+import { ThemeProps } from './types/ThemeProps'
 
 import { cards } from './shared/cards'
 import { formatTimeElapsed } from './helpers/formatTimeElapsed'
@@ -173,38 +178,46 @@ const App = () => {
   }
 
   return (
-    <C.Container>
-      <C.Info>
-        <C.LogoLink href="">
-          <C.Logo src={logoImage} alt="logo devMemory" />
-        </C.LogoLink>
+    <C.BgWrapper currentTheme={theme}>
+      <C.Container>
+        <C.Info currentTheme={theme}>
+          <C.LogoLink href="">
+            <C.Logo src={theme === 'dark' ? darkLogoImage : logoImage} alt="logo devMemory" />
+            <C.ThemeIcon src={theme === 'dark' ? themeIconBlack : themeIconBright} onClick={handleThemeClick} />
+          </C.LogoLink>
 
-        <C.InfoArea>
-          <GameInfoItem label='Tempo' record={false} value={formatTimeElapsed(timeElapsed) || '00:00'} />
-          <GameInfoItem label='Movimentos' record={false} value={`${moveCount}`} />
-          <GameInfoItem label='Recorde' record={true} value={''}>
-            <>
-              {`Tempo: ${formatTimeElapsed(record[0]) || '00:00'}`}
-              <br />
-              {`Movimentos: ${record[1] || 0}`}
-            </>
-          </GameInfoItem>
-        </C.InfoArea>
+          <C.InfoArea>
+            <GameInfoItem label='Tempo' record={false} currentTheme={theme} value={formatTimeElapsed(timeElapsed) || '00:00'} />
+            <GameInfoItem label='Movimentos' record={false} currentTheme={theme} value={`${moveCount}`} />
+            <GameInfoItem label='Recorde' record={true} currentTheme={theme} value={''}>
+              <>
+                {`Tempo: ${formatTimeElapsed(record[0]) || '00:00'}`}
+                <br />
+                {`Movimentos: ${record[1] || 0}`}
+              </>
+            </GameInfoItem>
+          </C.InfoArea>
 
-        <Button label={playing ? 'Reiniciar' : 'Iniciar Jogo'} icon={playing ? restartIcon : ''} onClick={resetGameGrid} />
-      </C.Info>
+          <Button
+            label={playing ? 'Reiniciar' : 'Iniciar Jogo'}
+            icon={theme === 'light' && playing ? restartIcon : darkRestartIcon}
+            currentTheme={theme}
+            onClick={resetGameGrid} />
+        </C.Info>
 
-      <C.GridArea>
-        <C.Grid>
-          {cardStatus.current.map((card, index) => (
-            <CardItem
-              key={index}
-              card={card}
-              onClick={() => handleItemClick(index)} />
-          ))}
-        </C.Grid>
-      </C.GridArea>
-    </C.Container >
+        <C.GridArea>
+          <C.Grid>
+            {cardStatus.current.map((card, index) => (
+              <CardItem
+                key={index}
+                card={card}
+                currentTheme={theme}
+                onClick={() => handleItemClick(index)} />
+            ))}
+          </C.Grid>
+        </C.GridArea>
+      </C.Container >
+    </C.BgWrapper>
   )
 }
 
