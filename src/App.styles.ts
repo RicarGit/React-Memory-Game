@@ -1,4 +1,14 @@
 import styled from "styled-components/macro"
+import { ThemeProps } from "types/ThemeProps"
+
+type Wrapper = {
+  currentTheme: ThemeProps
+}
+
+export const BgWrapper = styled.div<Wrapper>`
+  height: 100vh;
+  background: ${({ theme, currentTheme }) => theme[currentTheme].background};
+`
 
 export const Container = styled.div`
   width: 100%;
