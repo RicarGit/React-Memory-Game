@@ -19,7 +19,20 @@ const App = () => {
   const [moveCount, setMoveCount] = useState(0)
   const [upturnedCardsCount, setUpturnedCardsCount] = useState(0)
   const [record, setRecord] = useState<number[]>([])
+  const [theme, setTheme] = useState<ThemeProps>('light')
   const cardStatus = useRef<CardStatus[]>([])
+
+  useEffect(() => {
+    const storageTheme = localStorage.getItem('theme')
+
+    if (storageTheme === 'light') {
+      setTheme('light')
+    }
+
+    if (storageTheme === 'dark') {
+      setTheme('dark')
+    }
+  }, [])
 
   useEffect(() => {
     const recordJson = localStorage.getItem('record')
@@ -144,6 +157,20 @@ const App = () => {
       }
     }
   }, [playing, upturnedCardsCount])
+
+  const handleThemeClick = (e: MouseEvent) => {
+    e.preventDefault()
+
+    setTheme(prevTheme => {
+      if (prevTheme === 'light') {
+        localStorage.setItem('theme', 'dark')
+        return 'dark'
+      }
+
+      localStorage.setItem('theme', 'false')
+      return 'light'
+    })
+  }
 
   return (
     <C.Container>
