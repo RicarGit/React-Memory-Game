@@ -11,6 +11,7 @@ import darkRestartIcon from './assets/svgs/restartDark.svg'
 import { GameInfoItem } from './shared/components/GameInfoItem'
 import { CardItem } from './shared/components/CardItem'
 import { Button } from './shared/components/Button'
+import { ThemeIcon } from 'shared/components/ThemeButton/styles'
 
 import { CardStatus } from './types/CardStatus'
 import { ThemeProps } from './types/ThemeProps'
@@ -183,7 +184,7 @@ const App = () => {
         <C.Info currentTheme={theme}>
           <C.LogoLink href="">
             <C.Logo src={theme === 'dark' ? darkLogoImage : logoImage} alt="logo devMemory" />
-            <C.ThemeIcon src={theme === 'dark' ? themeIconBlack : themeIconBright} onClick={handleThemeClick} />
+            <ThemeIcon src={theme === 'dark' ? themeIconBlack : themeIconBright} onClick={handleThemeClick} />
           </C.LogoLink>
 
           <C.InfoArea>
