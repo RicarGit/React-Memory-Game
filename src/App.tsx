@@ -1,17 +1,15 @@
-import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import * as C from './App.styles'
 import logoImage from './assets/devmemory_logo.png'
 import darkLogoImage from './assets/devmemory_logo_dark_mode.png'
-import themeIconBright from './assets/brightness.png'
-import themeIconBlack from './assets/blackness.png'
 import restartIcon from './assets/svgs/restart.svg'
 import darkRestartIcon from './assets/svgs/restartDark.svg'
 
 import { GameInfoItem } from './shared/components/GameInfoItem'
 import { CardItem } from './shared/components/CardItem'
 import { Button } from './shared/components/Button'
-import { ThemeIcon } from 'shared/components/ThemeButton/styles'
+import { ThemeButton } from 'shared/components/ThemeButton'
 
 import { CardStatus } from './types/CardStatus'
 import { ThemeProps } from './types/ThemeProps'
@@ -164,27 +162,13 @@ const App = () => {
     }
   }, [playing, upturnedCardsCount])
 
-  const handleThemeClick = (e: MouseEvent) => {
-    e.preventDefault()
-
-    setTheme(prevTheme => {
-      if (prevTheme === 'light') {
-        localStorage.setItem('theme', 'dark')
-        return 'dark'
-      }
-
-      localStorage.setItem('theme', 'false')
-      return 'light'
-    })
-  }
-
   return (
     <C.BgWrapper currentTheme={theme}>
       <C.Container>
         <C.Info currentTheme={theme}>
           <C.LogoLink href="">
             <C.Logo src={theme === 'dark' ? darkLogoImage : logoImage} alt="logo devMemory" />
-            <ThemeIcon src={theme === 'dark' ? themeIconBlack : themeIconBright} onClick={handleThemeClick} />
+            <ThemeButton currentTheme={theme} setTheme={setTheme} />
           </C.LogoLink>
 
           <C.InfoArea>
