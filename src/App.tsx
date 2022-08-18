@@ -185,7 +185,10 @@ const App = () => {
 
           <Button
             label={playing ? 'Reiniciar' : 'Iniciar Jogo'}
-            icon={theme === 'light' && playing ? restartIcon : darkRestartIcon}
+            icon={
+              (playing || '') &&
+              (theme === 'light' ? restartIcon : darkRestartIcon)
+            }
             currentTheme={theme}
             onClick={resetGameGrid} />
         </C.Info>
@@ -206,4 +209,4 @@ const App = () => {
   )
 }
 
-export default App;
+export default App
