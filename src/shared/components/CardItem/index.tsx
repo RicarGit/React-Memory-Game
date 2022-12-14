@@ -24,10 +24,10 @@ export const CardItem = ({ card, onClick, currentTheme }: Props) => {
       onClick={onClick}
     >
       {fixedUpturnedCard || upturnedCard ||
-        <C.Icon src={currentTheme === 'dark' ? b7DarkSvg : b7Svg} alt="card's back" />
+        <C.Icon src={currentTheme === 'dark' ? b7DarkSvg : b7Svg} />
       }
       {(fixedUpturnedCard || upturnedCard) &&
-        <C.Icon src={cards[cardIndex!].icon} alt="card's front" />
+        <C.Icon src={cards[cardIndex!].icon} />
       }
     </C.Container>
   )
